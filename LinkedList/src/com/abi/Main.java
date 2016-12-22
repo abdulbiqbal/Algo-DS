@@ -18,7 +18,23 @@ public class Main {
 		
 		System.out.println("Middle Element: " + ll.getMiddleElement());
 		
-		System.out.println("Is Palimdrome: " + ll.isPalindrome());
+		//System.out.println("Is Palimdrome: " + ll.isPalindrome());
+		System.out.println("Is Palimdrome: " + ll.isPalindrome2());
+		
+		//ll.reverse();
+		//System.out.println("Reversed: " + ll);
+		
+		/*LinkedList.printNodes(ll.head.next);
+		
+		System.out.println();
+		Node x = LinkedList.reverse1(ll.head.next);
+		
+		LinkedList.printNodes(x);
+		
+		System.out.println(ll);*/
+		
+		System.out.println(ll);
+		
 
 	}
 
