@@ -1,0 +1,11 @@
+/ImageReader/.gitignore
+/ImageReader/.settings
+/ImageReader/bin
+/ImageReader/.classpath
+/TechGigAmazon/.gitignore
+/TechGigAmazon/.settings
+/TechGigAmazon/bin
+/TechGigAmazon/.classpath
+/LinkedList/bin
+/String/bin
+/LinkedList/*.classpath
