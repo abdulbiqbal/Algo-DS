@@ -9,3 +9,8 @@
 /LinkedList/bin
 /String/bin
 /LinkedList/*.classpath
+/AVLTree/.gitignore
+/AVLTree/.settings
+/AVLTree/bin
+/AVLTree/.classpath
+/String/*.classpath
