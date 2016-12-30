@@ -181,6 +181,18 @@ public class LinkedList<T> {
 		head = p;
 
 	}
+	
+	static Node reverseRec(Node node){
+		if(node.next == null)
+			return node;
+		
+		Node rem = reverseRec(node.next);
+		node.next.next = node;
+		node.next = null;
+		
+		return rem;
+		
+	}
 
 	static Node reverse1(Node head){
 

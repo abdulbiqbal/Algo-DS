@@ -10,9 +10,9 @@ public class Main {
 		
 		ll.addToTheLast(new Node<Integer>(2));
 		ll.addToTheLast(new Node<Integer>(3));
-		ll.addToTheLast(new Node<Integer>(3));
-		ll.addToTheLast(new Node<Integer>(2));
-		ll.addToTheLast(new Node<Integer>(1));
+		ll.addToTheLast(new Node<Integer>(4));
+		ll.addToTheLast(new Node<Integer>(5));
+		ll.addToTheLast(new Node<Integer>(6));
 		
 		System.out.println(ll);
 		
@@ -33,7 +33,15 @@ public class Main {
 		
 		System.out.println(ll);*/
 		
-		System.out.println(ll);
+		//ll.reverse();
+		
+		//System.out.println(ll);
+		
+		Node r = LinkedList.reverseRec(ll.head);
+		
+		LinkedList.printNodes(r);
+		
+		
 		
 
 	}
