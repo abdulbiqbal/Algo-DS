@@ -36,6 +36,9 @@ public class Main {
 		result = Integer.MAX_VALUE;
 		
 		knightWalk(board,s1,s2,d1,d2,0);
+		
+		if(result == Integer.MAX_VALUE)
+			return -1;
 		return result;
 	}
 
