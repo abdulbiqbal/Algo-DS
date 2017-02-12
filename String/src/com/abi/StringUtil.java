@@ -87,5 +87,38 @@ public class StringUtil {
 		
 		return result*sign;
 	}
+	
+	static String reverseStringWordWise(String input){
+		int wordStart = 0;
+		int wordEnd = -1;
+		char[] inputStr = input.toCharArray();
+		for (int i = 0; i < inputStr.length; i++) {			
+			if(inputStr[i] == '.'){
+				wordEnd = i-1;
+				reverseString(inputStr,wordStart,wordEnd);
+				wordStart = i+1;
+			}			
+		}
+		reverseString(inputStr,wordStart,input.length()-1);
+		reverseString(inputStr,0,input.length()-1);
+		
+		return new String(inputStr);
+		
+	}
+	
+	static void reverseString(char[] inputStr, int start, int end){
+		while(start < end){
+			swapChar(inputStr,start,end);
+			start++;
+			end--;
+		}
+		
+	}
+
+	private static void swapChar(char[] inputStr, int start, int end) {
+		char temp = inputStr[start];
+		inputStr[start] = inputStr[end];
+		inputStr[end] = temp;
+	}
 
 }
