@@ -1,17 +1,21 @@
 package com.abi;
 
-import java.util.List;
 import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 
+/**
+ * Finite State Machine
+ * @author abasit
+ *
+ */
 public class FSM {
 	
-	Set<State> initialStates;	
-	State currentState;
-	boolean initialized = false;
+	private Set<State> initialStates;	
+	private State currentState;
+	private boolean initialized = false;
 	
 	
 	public boolean isInitialized() {
@@ -36,9 +40,13 @@ public class FSM {
 		this.currentState = currentState;
 	}
 	
+	/**
+	 * Method to initialize the Finite State Machine
+	 * @param stateName initial state name  of the FSM
+	 */
 	public void initialize(String stateName){
 		if(StringUtils.isNotEmpty(stateName)){
-			Optional<State> opState = this.initialStates.stream().filter(x->x.name.equals(stateName)).findFirst();
+			Optional<State> opState = this.initialStates.stream().filter(x->x.getName().equals(stateName)).findFirst();
 			if(opState != null && opState.isPresent()){
 				this.currentState = opState.get();
 				this.initialized = true;
@@ -51,6 +59,10 @@ public class FSM {
 		
 	}
 
+	/**
+	 * Method to process an Event
+	 * @param input
+	 */
 	public void process(String input) {
 		if(!this.initialized || this.currentState == null){
 			throw new FSMException("FSM Not initialized");

@@ -13,7 +13,7 @@ public class Event {
 		this.name = name;
 	}
 
-	String name;
+	private String name;
 
 	public String getName() {
 		return name;

@@ -19,8 +19,8 @@ public class State{
 		this.transitions = new HashMap<>();
 	}
 	
-	String name;
-	Map<Event,State> transitions;	
+	private String name;
+	private Map<Event,State> transitions;	
 	
 
 	public Map<Event, State> getTransitions() {

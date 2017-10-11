@@ -1,28 +1,27 @@
 package com.abi;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
+/**
+ * Main Class to demonstrate FSM
+ * @author abasit
+ *
+ */
 public class Main {
 
 	public static void main(String[] args) throws Exception {
-
 		FSM fsm = buildFSM();
-
 		interactWithFSM(fsm);
-
-
-		/*ObjectMapper om = new ObjectMapper();		
-		System.out.println(om.writeValueAsString(fsm));*/
 	}
 
+	/**
+	 * Method to interact with a FSM
+	 * @param fsm
+	 * @throws Exception
+	 */
 	private static void interactWithFSM(FSM fsm) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-
 
 		while(fsm != null && (!fsm.isInitialized() || !fsm.getCurrentState().isTerminal())){
 			System.out.print(">");
@@ -42,6 +41,10 @@ public class Main {
 
 	}
 
+	/**
+	 * Method to build a demo FSM
+	 * @return
+	 */
 	private static FSM buildFSM(){
 		FSMBuilder builder = new FSMBuilder();
 

@@ -24,11 +24,11 @@ public class FSMBuilder {
 		this.allStateTransitions = new HashMap<>();
 	}
 
-	Set<State> states;
-	Set<State> initialStates;
-	Set<State> terminalStates;
-	Set<Event> events;
-	Map<Event,State> allStateTransitions;
+	private Set<State> states;
+	private Set<State> initialStates;
+	private Set<State> terminalStates;
+	private Set<Event> events;
+	private Map<Event,State> allStateTransitions;
 
 	public FSM build(){
 		this.addAllStatesTransitions();
@@ -102,7 +102,7 @@ public class FSMBuilder {
 
 	public FSMBuilder addState(String name){
 		if(StringUtils.isNotEmpty(name)){
-			Optional<State> opState = this.states.stream().filter(x->x.name.equals(name)).findFirst();
+			Optional<State> opState = this.states.stream().filter(x->x.getName().equals(name)).findFirst();
 			if(opState == null || !opState.isPresent()){
 				this.states.add(new State(name));
 			}else{
@@ -114,7 +114,7 @@ public class FSMBuilder {
 
 	public FSMBuilder addInitialState(String name){
 		if(StringUtils.isNotEmpty(name)){
-			Optional<State> optState = this.states.stream().filter(x->x.name.equals(name)).findFirst();
+			Optional<State> optState = this.states.stream().filter(x->x.getName().equals(name)).findFirst();
 			if(optState != null && optState.isPresent()){
 				State state = optState.get();
 				this.initialStates.add(state);
@@ -131,7 +131,7 @@ public class FSMBuilder {
 
 	public FSMBuilder addTerminalState(String name){
 		if(StringUtils.isNotEmpty(name)){
-			Optional<State> optState = this.states.stream().filter(x->x.name.equals(name)).findFirst();
+			Optional<State> optState = this.states.stream().filter(x->x.getName().equals(name)).findFirst();
 
 			if(optState != null && optState.isPresent()){
 				State state = optState.get();
@@ -151,7 +151,7 @@ public class FSMBuilder {
 
 	public FSMBuilder addEvent(String name){
 		if(StringUtils.isNotEmpty(name)){
-			Optional<Event> opsEvent = this.events.stream().filter(x->x.name.equals(name)).findFirst();
+			Optional<Event> opsEvent = this.events.stream().filter(x->x.getName().equals(name)).findFirst();
 			if(opsEvent == null || !opsEvent.isPresent()){
 				this.events.add(new Event(name));
 			}else{
@@ -163,14 +163,14 @@ public class FSMBuilder {
 
 	public FSMBuilder addTransition(String sourceStatename,String eventName,String destinationStatename){
 		if(StringUtils.isNotEmpty(sourceStatename) && StringUtils.isNotEmpty(eventName) && StringUtils.isNotEmpty(destinationStatename)){
-			Event event = this.events.stream().filter(x->x.name.equals(eventName)).findFirst().get();
-			State destinationState = this.states.stream().filter(x->x.name.equals(destinationStatename)).findFirst().get();
+			Event event = this.events.stream().filter(x->x.getName().equals(eventName)).findFirst().get();
+			State destinationState = this.states.stream().filter(x->x.getName().equals(destinationStatename)).findFirst().get();
 
 			if(event != null && destinationState != null){
 				if(ALL_STATES.equals(sourceStatename)){
 					this.allStateTransitions.put(event, destinationState);
 				}else{
-					State sourceState = this.states.stream().filter(x->x.name.equals(sourceStatename)).findFirst().get();
+					State sourceState = this.states.stream().filter(x->x.getName().equals(sourceStatename)).findFirst().get();
 					if(sourceState!= null){
 						if(this.terminalStates.contains(sourceState)){
 							throw new FSMException("Terminal states cannot have any event transitions.");
