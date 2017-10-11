@@ -22,5 +22,15 @@ public class Event {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	@Override
+	public String toString(){
+		return "Event: " + name;
+	}
+	
+	@Override
+	public boolean equals(Object event) {
+	   return name.equals(((Event)event).name);
+	}
 
 }
