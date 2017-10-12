@@ -1,5 +1,9 @@
 package com.abi;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -31,8 +35,62 @@ public class FSMTest {
 	}
 	
 	@Test(expected=FSMException.class)
-	public void test(){
+	public void testEmptyState(){
+		this.instance.initialize("");
+	}
+	
+	@Test(expected=FSMException.class)
+	public void testInvalidInitialState1(){
+		this.instance.initialize("stateX");
+	}
+	
+	@Test(expected=FSMException.class)
+	public void testInvalidInitialState2(){
 		this.instance.initialize("state3");
 	}
+	
+	@Test()
+	public void testValidInitialState(){
+		this.instance.initialize("state1");
+		assertNotNull((this.instance.getCurrentState()));
+		assertTrue(this.instance.isInitialized());
+	}
+	
+	@Test(expected=FSMException.class)
+	public void testUninitializedFSMProcessing(){
+		this.instance.process("event1");
+	}
+	
+	@Test(expected=FSMException.class)
+	public void testEmptyEventProcess1(){
+		this.instance.initialize("state1");
+		this.instance.process(null);
+	}
+	
+	@Test(expected=FSMException.class)
+	public void testEmptyEventProcess2(){
+		this.instance.initialize("state1");
+		this.instance.process("");
+	}
+	
+	@Test(expected=FSMException.class)
+	public void testInvalidEventProcess(){
+		this.instance.initialize("state1");
+		this.instance.process("event2");
+	}
+	
+	@Test()
+	public void testValidEventProcess(){
+		State stateX = new State("stateX"); 
+		State stateY = new State("stateY");
+		Event eventA = new Event("eventA");
+		this.instance.getInitialStates().add(stateX);
+		stateX.getTransitions().put(eventA, stateY);
+		
+		this.instance.initialize("stateX");
+		this.instance.process("eventA");
+		assertEquals(stateY, this.instance.getCurrentState());
+	}
+
 
 }

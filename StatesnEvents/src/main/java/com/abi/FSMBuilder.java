@@ -79,11 +79,13 @@ public class FSMBuilder {
 			finalStates.add(currentState);
 			stateReachable.addAll(stateTraversed);
 		}else{
-			for (Entry<Event, State> entry : currentState.getTransitions().entrySet()) {
-				stateTraversed.add(currentState);
-				traverse(entry.getValue(),stateReachable,finalStates,stateTraversed);
-				stateTraversed.remove(currentState);
+			stateTraversed.add(currentState);
+			for (Entry<Event, State> entry : currentState.getTransitions().entrySet()) {				
+				if(!stateTraversed.contains(entry.getValue())){
+					traverse(entry.getValue(),stateReachable,finalStates,stateTraversed);
+				}				
 			}
+			stateTraversed.remove(currentState);
 		}
 
 	}
@@ -100,6 +102,11 @@ public class FSMBuilder {
 
 	}
 
+	/**
+	 * Function add a new State to a FSM
+	 * @param name
+	 * @return
+	 */
 	public FSMBuilder addState(String name){
 		if(StringUtils.isNotEmpty(name)){
 			Optional<State> opState = this.states.stream().filter(x->x.getName().equals(name)).findFirst();
@@ -108,10 +115,18 @@ public class FSMBuilder {
 			}else{
 				throw new FSMException("State already exist with this name");
 			}
+		}else{
+			throw new FSMException("Invalid State Name");
 		}
 		return this;
 	}
 
+	/**
+	 * Function to add a state as a Initial State
+	 * 
+	 * @param name of an existing State
+	 * @return
+	 */
 	public FSMBuilder addInitialState(String name){
 		if(StringUtils.isNotEmpty(name)){
 			Optional<State> optState = this.states.stream().filter(x->x.getName().equals(name)).findFirst();
@@ -129,6 +144,12 @@ public class FSMBuilder {
 		return this;
 	}
 
+	/**
+	 *  Function to add a state as a Terminal State
+	 *  
+	 * @param name
+	 * @return
+	 */
 	public FSMBuilder addTerminalState(String name){
 		if(StringUtils.isNotEmpty(name)){
 			Optional<State> optState = this.states.stream().filter(x->x.getName().equals(name)).findFirst();
@@ -157,6 +178,8 @@ public class FSMBuilder {
 			}else{
 				throw new FSMException("Event already exist with this name");
 			}
+		}else{
+			throw new FSMException("Invalid Event name");
 		}
 		return this;
 	}
@@ -170,15 +193,20 @@ public class FSMBuilder {
 				if(ALL_STATES.equals(sourceStatename)){
 					this.allStateTransitions.put(event, destinationState);
 				}else{
-					State sourceState = this.states.stream().filter(x->x.getName().equals(sourceStatename)).findFirst().get();
-					if(sourceState!= null){
+					Optional<State> optSourceState = this.states.stream().filter(x->x.getName().equals(sourceStatename)).findFirst();
+					if(optSourceState!= null && optSourceState.isPresent()){
+						State sourceState = optSourceState.get();
 						if(this.terminalStates.contains(sourceState)){
 							throw new FSMException("Terminal states cannot have any event transitions.");
 						}
 						sourceState.getTransitions().put(event, destinationState);
+					}else{
+						throw new FSMException("Invalid Source State");
 					}
 				}
 			}
+		}else{
+			throw new FSMException("Invalid State or Event names");
 		}
 		return this;
 	}
