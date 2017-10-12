@@ -10,13 +10,13 @@ import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
 
-public class FSMTest {
+public class FSMImplTest {
 	
-	FSM instance;
+	FSMImpl instance;
 	
 	@Before
 	public void setup(){
-		this.instance = new FSM();
+		this.instance = new FSMImpl();
 		
 		Set<State> initialStates = new HashSet<>();
 		State state1 = new State("state1");

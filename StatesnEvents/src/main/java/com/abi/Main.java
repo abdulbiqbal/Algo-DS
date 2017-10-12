@@ -46,7 +46,7 @@ public class Main {
 	 * @return
 	 */
 	private static FSM buildFSM(){
-		FSMBuilder builder = new FSMBuilder();
+		FSMBuilder builder = new FSMBuilderImpl();
 
 		FSM fsm = builder.addState("0S")
 				.addState("1S")

@@ -3,13 +3,13 @@ package com.abi;
 import org.junit.Before;
 import org.junit.Test;
 
-public class FSMBuilderTest {
+public class FSMBuilderImplTest {
 	
-	FSMBuilder instance;
+	FSMBuilderImpl instance;
 	
 	@Before
 	public void setup(){
-		this.instance = new FSMBuilder();
+		this.instance = new FSMBuilderImpl();
 		this.instance.addState("state1")
 		.addState("state2")
 		.addState("state10")
