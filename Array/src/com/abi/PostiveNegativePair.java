@@ -14,8 +14,8 @@ public class PostiveNegativePair {
 
 		while(T-- > 0){
 			int N = sc.nextInt();
-			boolean pos[] = new boolean[101];
-			boolean neg[] = new boolean[101];
+			boolean pos[] = new boolean[1001];
+			boolean neg[] = new boolean[1001];
 			for (int i = 0; i < N; i++) {
 				int n = sc.nextInt();				
 				if(n < 0){
@@ -26,7 +26,7 @@ public class PostiveNegativePair {
 			}
 			
 			boolean isAnyResult  = false;
-			for (int i = 0; i < 101; i++) {
+			for (int i = 0; i < 1001; i++) {
 				if(pos[i] && neg[i]){
 					isAnyResult = true;
 					System.out.print("-" + i + " " + i + " ");
@@ -34,6 +34,8 @@ public class PostiveNegativePair {
 			}
 			if(!isAnyResult)
 				System.out.print(0);
+			
+			System.out.println();
 		}
 
 		sc.close();
