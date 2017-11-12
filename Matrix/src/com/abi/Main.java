@@ -11,7 +11,6 @@ public class Main {
 		
 		//Matrix.spiralPrint(mat);
 		System.out.println(Matrix.findK(mat, 3, 6, 7));
-		;
 
 	}
 
